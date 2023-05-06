@@ -2,10 +2,6 @@ import React, { useContext } from "react";
 import Header from "./Header";
 import {
   Container,
-  // Alert,
-  // CloseIcon,
-  // IconButton,
-  // Snackbar,
 } from "@/components/mui";
 // import { UIContext } from "./contexts/UI.context";
 
