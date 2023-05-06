@@ -1,13 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Drawer,
+  List,
+  Divider,
+  Typography,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@/components/mui";
 
 function MobileNavigation({
   mobileOpen = false,
