@@ -3,6 +3,7 @@ import Image from "next/image";
 // import { Inter } from "next/font/google";
 import { Button, HomeIcon } from "@/components/mui";
 import Layout from "@/components/Layout";
+import Heading from "@/components/Heading";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function Contact() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>Contact Us</h1>
+        <Heading component="h2">Contact Us</Heading>
         <Button variant="contained">
           <HomeIcon />
           Button

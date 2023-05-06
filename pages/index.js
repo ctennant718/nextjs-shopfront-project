@@ -3,6 +3,8 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Button, HomeIcon } from "@/components/mui";
 import Layout from "@/components/Layout";
+import Heading from "@/components/Heading";
+import Paragraph from "@/components/Paragraph";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>Homepage</h1>
+        <Heading component="h2">Homepage</Heading>
+        <Paragraph>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo voluptates aliquam in voluptatem ad cupiditate asperiores quod cum quibusdam voluptate. Corrupti, fugit vitae? Perferendis tempore debitis neque obcaecati deleniti tempora.</Paragraph>
         <Button variant="contained">
           <HomeIcon />
           Button
