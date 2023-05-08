@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button, HomeIcon } from "@/components/mui";
 import Layout from "@/components/Layout";
 import Heading from "@/components/Heading";
+import ContactForm from "@/components/forms/ContactForm";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,7 @@ export default function Contact() {
       </Head>
       <Layout>
         <Heading component="h2">Contact Us</Heading>
-        <Button variant="contained">
-          <HomeIcon />
-          Button
-        </Button>
+        <ContactForm />
       </Layout>
     </>
   );

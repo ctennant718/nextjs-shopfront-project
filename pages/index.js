@@ -19,7 +19,6 @@ export default function Home() {
       </Head>
       <Layout>
         <Heading component="h2">Homepage</Heading>
-        <Paragraph>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo voluptates aliquam in voluptatem ad cupiditate asperiores quod cum quibusdam voluptate. Corrupti, fugit vitae? Perferendis tempore debitis neque obcaecati deleniti tempora.</Paragraph>
         <Button variant="contained">
           <HomeIcon />
           Button
