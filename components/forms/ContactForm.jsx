@@ -46,6 +46,7 @@ export default function ContactForm({ submitHandler }) {
   let submitFn = (vals) => {
     reset();
     console.log(vals);
+    submitHandler(vals);
   };
 
   return (
