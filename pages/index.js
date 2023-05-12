@@ -1,12 +1,14 @@
 import Head from "next/head";
-// import Image from "next/image";
-import { Inter } from "next/font/google";
+
+import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { fetchProducts } from "@/lib/api-functions/server/products/queries";
+import { STORAGE_KEY } from "@/lib/tq/products/settings";
+
 import { Button, HomeIcon } from "@/components/mui";
 import Layout from "@/components/Layout";
 import Heading from "@/components/Heading";
-import Paragraph from "@/components/Paragraph";
-
-// const inter = Inter({ subsets: ["latin"] });
+import QueryBoundaries from "@/components/QueryBoundaries";
+import ProductList from "@/components/ProductList";
 
 export default function Home() {
   return (
@@ -19,11 +21,28 @@ export default function Home() {
       </Head>
       <Layout>
         <Heading component="h2">Homepage</Heading>
-        <Button variant="contained">
-          <HomeIcon />
-          Button
-        </Button>
+        <QueryBoundaries>
+          <ProductList />
+        </QueryBoundaries>
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  // console.log("LLLL", context);
+  const products = await fetchProducts().catch((err) => console.log(err));
+  const queryClient = new QueryClient();
+
+  // If this was remote we'd use 'prefetchQuery'
+  await queryClient.setQueryData(
+    [STORAGE_KEY],
+    JSON.parse(JSON.stringify(products)),
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 }
