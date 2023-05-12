@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Head from "next/head";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
@@ -9,8 +10,10 @@ import Layout from "@/components/Layout";
 import Heading from "@/components/Heading";
 import QueryBoundaries from "@/components/QueryBoundaries";
 import ProductList from "@/components/ProductList";
+import { UIContext } from "@/components/contexts/UI.context";
 
 export default function Home() {
+  const { showMessage } = useContext(UIContext);
   return (
     <>
       <Head>
@@ -21,6 +24,16 @@ export default function Home() {
       </Head>
       <Layout>
         <Heading component="h2">Homepage</Heading>
+        <Button
+          onClick={() =>
+            showMessage({
+              type: "error",
+              string: "Something is wrong.",
+            })
+          }
+        >
+          Hi
+        </Button>
         <QueryBoundaries>
           <ProductList />
         </QueryBoundaries>
