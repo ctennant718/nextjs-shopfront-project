@@ -5,24 +5,20 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button } from "@mui/material";
 
-const schema = yup
-  .object()
-  .shape({
-    from: yup.string().email().max(50).required(),
-    subject: yup.string().max(300).required(),
-    message: yup.string().max(50000).required(),
-  })
-  .required();
+import { addProductSchema, updateProductSchema } from "@/lib/validation";
 
 const defaults = {
-  form: "",
-  subject: "",
-  message: "",
+  image: "",
+  title: "",
+  description: "",
+  quantity: "",
 };
 
-export default function ContactForm({ submitHandler }) {
-  // console.log(car);
-
+export default function ProductForm({ submitHandler, product }) {
+  let schema = addProductSchema;
+  if (product) {
+    schema = updateProductSchema;
+  }
   const {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
@@ -32,12 +28,12 @@ export default function ContactForm({ submitHandler }) {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
-    defaultValues: defaults,
+    defaultValues: product || defaults,
   });
 
   useEffect(() => {
     console.log(formState);
-  })
+  });
 
   const formRowStyle = {
     marginBlockEnd: "1em",
@@ -54,16 +50,16 @@ export default function ContactForm({ submitHandler }) {
       <div style={formRowStyle}>
         <Controller
           control={control}
-          name="from"
+          name="image"
           defaultValue={""}
           render={({ field }) => (
             <TextField
               type="text"
               {...field}
-              label="from"
+              label="image"
               fullWidth
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              error={!!errors.image}
+              helperText={errors.image?.message}
             />
           )}
         />
@@ -71,16 +67,16 @@ export default function ContactForm({ submitHandler }) {
       <div style={formRowStyle}>
         <Controller
           control={control}
-          name="subject"
+          name="title"
           defaultValue={""}
           render={({ field }) => (
             <TextField
               type="text"
               {...field}
-              label="subject"
+              label="title"
               fullWidth
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              error={!!errors.title}
+              helperText={errors.title?.message}
             />
           )}
         />
@@ -88,18 +84,52 @@ export default function ContactForm({ submitHandler }) {
       <div style={formRowStyle}>
         <Controller
           control={control}
-          name="message"
+          name="description"
           defaultValue={""}
           render={({ field }) => (
             <TextField
-              type="message"
+              type="text"
               {...field}
-              label="message"
+              label="description"
               multiline
               rows={4}
               fullWidth
-              error={!!errors.message}
-              helperText={errors.message?.message}
+              error={!!errors.description}
+              helperText={errors.description?.message}
+            />
+          )}
+        />
+      </div>
+      <div style={formRowStyle}>
+        <Controller
+          control={control}
+          name="price"
+          defaultValue={""}
+          render={({ field }) => (
+            <TextField
+              type="number"
+              {...field}
+              label="price"
+              fullWidth
+              error={!!errors.price}
+              helperText={errors.price?.message}
+            />
+          )}
+        />
+      </div>
+      <div style={formRowStyle}>
+        <Controller
+          control={control}
+          name="quantity"
+          defaultValue={""}
+          render={({ field }) => (
+            <TextField
+              type="number"
+              {...field}
+              label="quantity"
+              fullWidth
+              error={!!errors.quantity}
+              helperText={errors.quantity?.message}
             />
           )}
         />

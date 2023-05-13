@@ -1,7 +1,7 @@
 import React from 'react'
 import { useProducts } from "@/lib/tq/products/queries";
 import { List, ListItem } from "@/components/mui";
-// import Product from "@/components/Product";
+import Product from "@/components/Product";
 import Paragraph from "@/components/Paragraph";
 
 const ProductList = ({
@@ -28,8 +28,8 @@ const ProductList = ({
         <ListItem key={product._id} component="li">
           <Product
             product={product}
-            // deleteHandler={deleteHandler}
-            // headingLevel={headingLevel}
+            deleteHandler={deleteHandler}
+            headingLevel={headingLevel}
             // canUpdate={canUpdate}
             // canRemove={canRemove}
             // canBuy={!!user && canBuy}
