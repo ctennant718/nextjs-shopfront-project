@@ -20,6 +20,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import CircularProgress from "@mui/material/CircularProgress";
 
 export {
   Button,
@@ -43,5 +44,6 @@ export {
   CardActions,
   CloseIcon,
   Alert,
-  Snackbar
+  Snackbar,
+  CircularProgress,
 };
