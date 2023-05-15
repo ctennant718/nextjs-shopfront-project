@@ -15,23 +15,26 @@ const {
   identifier,
   roles: { admin },
   permissions: {
-    orders: {
-      create: createOrders,
-      read: readOrders,
-      update: updateOrders,
-      remove: removeOrders,
+    baskets: {
+      create: createBaskets,
+      read: readBaskets,
+      update: updateBaskets,
+      remove: removeBaskets,
     },
   },
 } = permissions;
 
 import {
-  updateOrder,
-  removeOrder,
-  getOrders,
-  addOrder,
-} from "@/lib/api-functions/server/orders/controllers";
+  updateBasket,
+  removeBasket,
+  removeItemFromBasket,
+  getBaskets,
+  getOwnBasket,
+  addBasket,
+  addToUserBasket
+} from "@/lib/api-functions/server/baskets/controllers";
 
-const baseRoute = "/api/v1/orders/:owner?";
+const baseRoute = "/api/v1/baskets/:owner?/:item?";
 
 const handler = nc({
   onError: (err, req, res, next) => {
@@ -44,14 +47,9 @@ const handler = nc({
   attachParams: true,
 })
 .use(async (req, res, next) => {
-  if (req.method === "GET") {
-    return next();
-  }
   try {
     const session = await getSession(req, res);
     req.user = session.user;
-    console.log(session);
-    console.log(req.user);
     next();
   } catch (err) {
     return handleUnauthorisedAPICall(res);
@@ -67,25 +65,37 @@ const handler = nc({
     if(!owner && !isAdmin) {
       return handleUnauthorisedAPICall(res);
     }
-    getOrders(req, res);
+    getBaskets(req, res);
   })
   .post(baseRoute, async (req, res) => {
-    if (!checkPermissions(req.user, identifier, createOrders)) {
+    const {owner} = req.params;
+    if(owner === 'own') {
+      return addToUserBasket(req, res);
+    }
+    if (!checkPermissions(req.user, identifier, createBaskets)) {
       return handleUnauthorisedAPICall(res);
     }
-    addOrder(req, res);
+    addBasket(req, res);
   })
   .put(baseRoute, async (req, res) => {
-    if (!checkPermissions(req.user, identifier, updateOrders)) {
+    // const {owner} = req.params;
+    // if(owner === 'own') {
+    //   return getOwnBasket(req, res);
+    // }
+    if (!checkPermissions(req.user, identifier, updateBaskets)) {
       return handleUnauthorisedAPICall(res);
     }
-    updateOrder(req, res);
+    updateBasket(req, res);
   })
   .delete(baseRoute, async (req, res) => {
-    if (!checkPermissions(req.user, identifier, removeOrders)) {
+    const {owner} = req.params;
+    if(owner === 'own') {
+      return removeItemFromBasket(req, res);
+    }
+    if (!checkPermissions(req.user, identifier, removeBaskets)) {
       return handleUnauthorisedAPICall(res);
     }
-    removeOrder(req, res);
+    removeBasket(req, res);
   });
 
 export default handler;
