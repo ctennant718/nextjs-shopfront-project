@@ -1,9 +1,16 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { fetchProducts } from "@/lib/api-functions/server/products/queries";
 import { STORAGE_KEY } from "@/lib/tq/products/settings";
+
+import { log } from "@/lib/utils/formatters";
+
+import { checkPermissions } from "@/lib/api-functions/server/utils";
+import settings from "@/lib/api-functions/server/permissions";
 
 import { Button } from "@/components/mui";
 import Layout from "@/components/Layout";
@@ -12,8 +19,26 @@ import QueryBoundaries from "@/components/QueryBoundaries";
 import ProductList from "@/components/ProductList";
 import { useDelete } from "@/lib/tq/products/mutations";
 
-export default function AdminProductList() {
+export default function AdminProductList({ user }) {
   const removeMutation = useDelete();
+  const canAdd = checkPermissions(
+    user,
+    settings.identifier,
+    settings.permissions.products.create,
+  );
+
+  const canUpdate = checkPermissions(
+    user,
+    settings.identifier,
+    settings.permissions.products.update,
+  );
+
+  const canRemove = checkPermissions(
+    user,
+    settings.identifier,
+    settings.permissions.products.remove,
+  );
+
   const removeHandler = (id) => {
     removeMutation.mutate(id);
   };
@@ -27,34 +52,47 @@ export default function AdminProductList() {
       </Head>
       <Layout>
         <Heading component="h2">Products</Heading>
-        <Button
-          variant="contained"
-          component={Link}
-          href={`/admin/products/add`}
-        >
-          Add Product
-        </Button>
+        {canAdd && (
+          <Button
+            variant="contained"
+            component={Link}
+            href={`/admin/products/add`}
+          >
+            Add Product
+          </Button>
+        )}
         <QueryBoundaries>
-          <ProductList deleteHandler={removeHandler} />
+          <ProductList
+            deleteHandler={removeHandler}
+            canUpdate={canUpdate}
+            canRemove={canRemove}
+            // canBuy={false}
+          />
         </QueryBoundaries>
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps(context) {
-  const products = await fetchProducts().catch((err) => console.log(err));
-  const queryClient = new QueryClient();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(context) {
+    // Getting user data from Auth0
+    const session = await getSession(context.req, context.res);
 
-  // If this was remote we'd use 'prefetchQuery'
-  await queryClient.setQueryData(
-    [STORAGE_KEY],
-    JSON.parse(JSON.stringify(products)),
-  );
+    const products = await fetchProducts().catch((err) => console.log(err));
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+    const queryClient = new QueryClient();
+    // If this was remote we'd use 'prefetchQuery'
+    await queryClient.setQueryData(
+      [STORAGE_KEY],
+      JSON.parse(JSON.stringify(products)),
+    );
+
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+        user: session.user,
+      },
+    };
+  },
+});

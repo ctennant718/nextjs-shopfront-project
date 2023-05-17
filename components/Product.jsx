@@ -16,19 +16,19 @@ import {
   Box,
 } from "@/components/mui";
 import Heading from "@/components/Heading";
-// import { slugify, formatPrice } from "@/lib/utils/formatters";
+import { slugify, formatPrice } from "@/lib/utils/formatters";
 
 const ProductDisplay = ({
   product: { _id, title, image, price, quantity } = {},
   deleteHandler = () => {
     console.log("no delete handler supplied");
-  // },
+  },
   // addToBasket = (id) => {
   //   console.log("no addToBasket handler supplied", id);
-  },
+  // },
   headingLevel = 2,
-  // canUpdate = false,
-  // canRemove = false,
+  canUpdate = false,
+  canRemove = false,
   // canBuy=false
 }) => {
   return (
@@ -52,8 +52,7 @@ const ProductDisplay = ({
             Price
           </Typography>
           <Typography component="dd" sx={{ fontWeight: "bold" }}>
-          {price}
-            {/* {formatPrice(toDecimal(dinero({ amount: price, currency: GBP})))} */}
+            {price}
           </Typography>
           <Typography component="dt" sx={{ textAlign: "right" }}>
             Quantity
@@ -65,10 +64,10 @@ const ProductDisplay = ({
       </CardContent>
       <CardActions sx={{ display: "grid", placeItems: "center" }}>
         <Box>
-          {/* <Button href={`/products/${slugify(title, _id)}`} component={Link}>
+          <Button href={`/products/${slugify(title, _id)}`} component={Link}>
             View
-          </Button> */}
-          {/* {canUpdate && (
+          </Button>
+          {canUpdate && (
             <IconButton
               aria-label="update"
               component={Link}
@@ -82,7 +81,7 @@ const ProductDisplay = ({
               <DeleteIcon />
             </IconButton>
           )}
-          {canBuy && (
+          {/* {canBuy && (
             <Button onClick={addToBasket}>
               Add to Basket
             </Button>
