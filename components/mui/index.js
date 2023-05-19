@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
@@ -23,6 +24,7 @@ import CardActions from "@mui/material/CardActions";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
+import Badge from '@mui/material/Badge';
 
 export {
   Button,
@@ -50,4 +52,6 @@ export {
   Alert,
   Snackbar,
   CircularProgress,
+  ShoppingCartIcon,
+  Badge,
 };

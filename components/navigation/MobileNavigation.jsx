@@ -1,16 +1,19 @@
 import React from "react";
 import Link from "next/link";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
+
 import {
-  Box,
-  Drawer,
-  List,
-  Divider,
   Typography,
+  Drawer,
+  Divider,
+  List,
   ListItem,
   ListItemButton,
   ListItemText,
-} from "@/components/mui";
-import { useUser } from "@auth0/nextjs-auth0/client";
+  Box
+} from '@/components/mui'
+import ShoppingCartDisplay from "@/components/BasketDisplay";
 
 function MobileNavigation({
   mobileOpen = false,
@@ -31,7 +34,7 @@ function MobileNavigation({
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, 
+          keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
           display: { xs: "block", sm: "none" },
@@ -40,27 +43,28 @@ function MobileNavigation({
       >
         <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
           <Typography variant="h6" sx={{ my: 2 }}>
-            Design Shop
+            Go Outdoors! {user && <ShoppingCartDisplay user={user} />}
           </Typography>
           <Divider />
           <List>
             <ListItem>
               <Link href={"/"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
+                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
                   <ListItemText primary={"Shop"} />
                 </ListItemButton>
               </Link>
             </ListItem>
+            
             <ListItem>
               <Link href={"/blog"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
+                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
                   <ListItemText primary={"Blog"} />
                 </ListItemButton>
               </Link>
             </ListItem>
             <ListItem>
               <Link href={"/contact"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
+                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
                   <ListItemText primary={"Contact"} />
                 </ListItemButton>
               </Link>

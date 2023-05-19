@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-// import { dinero, toDecimal } from "dinero.js";
-// import { GBP } from '@dinero.js/currencies';
+import { dinero, toDecimal } from "dinero.js";
+import { GBP } from '@dinero.js/currencies';
 import {
   Typography,
   List,
@@ -52,7 +52,7 @@ const ProductDisplay = ({
             Price
           </Typography>
           <Typography component="dd" sx={{ fontWeight: "bold" }}>
-            {price}
+          {formatPrice(toDecimal(dinero({ amount: price, currency: GBP})))}
           </Typography>
           <Typography component="dt" sx={{ textAlign: "right" }}>
             Quantity
