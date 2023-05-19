@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-// import CircularProgress from "@mui/material/CircularProgress";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button } from "@mui/material";
@@ -56,7 +55,7 @@ export default function ProductForm({ submitHandler, product }) {
             <TextField
               type="text"
               {...field}
-              label="image"
+              label="Image"
               fullWidth
               error={!!errors.image}
               helperText={errors.image?.message}
@@ -73,7 +72,7 @@ export default function ProductForm({ submitHandler, product }) {
             <TextField
               type="text"
               {...field}
-              label="title"
+              label="Title"
               fullWidth
               error={!!errors.title}
               helperText={errors.title?.message}
@@ -90,7 +89,7 @@ export default function ProductForm({ submitHandler, product }) {
             <TextField
               type="text"
               {...field}
-              label="description"
+              label="Description"
               multiline
               rows={4}
               fullWidth
@@ -109,7 +108,7 @@ export default function ProductForm({ submitHandler, product }) {
             <TextField
               type="number"
               {...field}
-              label="price"
+              label="Price"
               fullWidth
               error={!!errors.price}
               helperText={errors.price?.message}
@@ -126,7 +125,7 @@ export default function ProductForm({ submitHandler, product }) {
             <TextField
               type="number"
               {...field}
-              label="quantity"
+              label="Quantity"
               fullWidth
               error={!!errors.quantity}
               helperText={errors.quantity?.message}
@@ -136,21 +135,21 @@ export default function ProductForm({ submitHandler, product }) {
       </div>
       <div style={{ marginTop: 20 }}>
         <Button
-          type="reset"
-          onClick={() => reset()}
-          variant="contained"
-          sx={{ mr: 2 }}
-          disabled={!isDirty}
-        >
-          Reset
-        </Button>
-        <Button
           type="submit"
           primary="true"
+          sx={{ mr: 2 }}
           variant="contained"
           disabled={isSubmitting || !isDirty || (isDirty && !isValid)}
         >
           Submit
+        </Button>
+        <Button
+          type="reset"
+          onClick={() => reset()}
+          variant="contained"
+          disabled={!isDirty}
+        >
+          Reset
         </Button>
       </div>
     </form>

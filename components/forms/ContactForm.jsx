@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-// import CircularProgress from "@mui/material/CircularProgress";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button } from "@mui/material";
@@ -21,8 +20,6 @@ const defaults = {
 };
 
 export default function ContactForm({ submitHandler }) {
-  // console.log(car);
-
   const {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
@@ -37,7 +34,7 @@ export default function ContactForm({ submitHandler }) {
 
   useEffect(() => {
     console.log(formState);
-  })
+  });
 
   const formRowStyle = {
     marginBlockEnd: "1em",
@@ -60,10 +57,10 @@ export default function ContactForm({ submitHandler }) {
             <TextField
               type="text"
               {...field}
-              label="from"
+              label="From"
               fullWidth
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              error={!!errors.from}
+              helperText={errors.from?.message}
             />
           )}
         />
@@ -77,10 +74,10 @@ export default function ContactForm({ submitHandler }) {
             <TextField
               type="text"
               {...field}
-              label="subject"
+              label="Subject"
               fullWidth
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              error={!!errors.subject}
+              helperText={errors.subject?.message}
             />
           )}
         />
@@ -94,7 +91,7 @@ export default function ContactForm({ submitHandler }) {
             <TextField
               type="message"
               {...field}
-              label="message"
+              label="Message"
               multiline
               rows={4}
               fullWidth
@@ -106,21 +103,21 @@ export default function ContactForm({ submitHandler }) {
       </div>
       <div style={{ marginTop: 20 }}>
         <Button
-          type="reset"
-          onClick={() => reset()}
-          variant="contained"
-          sx={{ mr: 2 }}
-          disabled={!isDirty}
-        >
-          Reset
-        </Button>
-        <Button
           type="submit"
           primary="true"
           variant="contained"
+          sx={{ mr: 1.5 }}
           disabled={isSubmitting || !isDirty || (isDirty && !isValid)}
         >
           Submit
+        </Button>
+        <Button
+          type="reset"
+          onClick={() => reset()}
+          variant="contained"
+          disabled={!isDirty}
+        >
+          Reset
         </Button>
       </div>
     </form>

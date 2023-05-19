@@ -34,7 +34,7 @@ function MobileNavigation({
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true, 
         }}
         sx={{
           display: { xs: "block", sm: "none" },
@@ -54,7 +54,6 @@ function MobileNavigation({
                 </ListItemButton>
               </Link>
             </ListItem>
-            
             <ListItem>
               <Link href={"/blog"} passHref style={itemLinkStyles}>
                 <ListItemButton sx={{ textAlign: "left", width: '100%' }}>

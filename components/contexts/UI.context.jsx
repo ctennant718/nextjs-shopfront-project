@@ -43,13 +43,3 @@ export const UIProvider = ({ children }) => {
     </UIContext.Provider>
   );
 };
-
-/*
-<Snackbar
-  open={open}
-  autoHideDuration={6000}
-  onClose={handleClose}
-  message="Note archived"
-  action={action}
-/>
-*/

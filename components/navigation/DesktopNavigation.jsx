@@ -58,13 +58,6 @@ function DesktopNavigation({
             >
               Blog
             </Button>
-            <Button
-              sx={{ color: lightTextColor }}
-              component={Link}
-              href="/contact"
-            >
-              Contact
-            </Button>
             {user ? (
               <>
                 <Button
@@ -74,6 +67,13 @@ function DesktopNavigation({
                 >
                   Profile
                 </Button>
+                <Button
+              sx={{ color: lightTextColor }}
+              component={Link}
+              href="/contact"
+            >
+              Contact
+            </Button>
                 <Button
                   href="/api/auth/logout"
                   component={Link}
