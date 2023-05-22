@@ -23,13 +23,13 @@ const ProductDisplay = ({
   deleteHandler = () => {
     console.log("no delete handler supplied");
   },
-  // addToBasket = (id) => {
-  //   console.log("no addToBasket handler supplied", id);
-  // },
+  addToBasket = (id) => {
+    console.log("no addToBasket handler supplied", id);
+  },
   headingLevel = 2,
   canUpdate = false,
   canRemove = false,
-  // canBuy=false
+  canBuy=false
 }) => {
   return (
     <Card sx={{ width: "100%" }}>
@@ -81,11 +81,11 @@ const ProductDisplay = ({
               <DeleteIcon />
             </IconButton>
           )}
-          {/* {canBuy && (
+          {canBuy && (
             <Button onClick={addToBasket}>
               Add to Basket
             </Button>
-          )} */}
+          )}
         </Box>
       </CardActions>
     </Card>

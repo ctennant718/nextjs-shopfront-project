@@ -19,24 +19,24 @@ function Layout({ children }) {
     hideDuration,
   } = useContext(UIContext);
 
-  const action = useCallback(
-    (props) => {
-      console.log(props);
-      return (
-        <>
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        </>
-      );
-    },
-    [handleClose],
-  );
+  // const action = useCallback(
+  //   (props) => {
+  //     console.log(props);
+  //     return (
+  //       <>
+  //         <IconButton
+  //           size="small"
+  //           aria-label="close"
+  //           color="inherit"
+  //           onClick={handleClose}
+  //         >
+  //           <CloseIcon fontSize="small" />
+  //         </IconButton>
+  //       </>
+  //     );
+  //   },
+  //   [handleClose],
+  // );
 
   return (
     <>
@@ -52,8 +52,15 @@ function Layout({ children }) {
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
-          <Paragraph sx={{margin: '0px'}}>{message}</Paragraph>
-          {action}
+          <Paragraph sx={{ margin: "0px" }}>{message}</Paragraph>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
         </Alert>
       </Snackbar>
     </>

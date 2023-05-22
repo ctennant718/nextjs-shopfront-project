@@ -4,12 +4,10 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { fetchProducts } from "@/lib/api-functions/server/products/queries";
 import { STORAGE_KEY } from "@/lib/tq/products/settings";
 
-
 import Layout from "@/components/Layout";
 import Heading from "@/components/Heading";
 import QueryBoundaries from "@/components/QueryBoundaries";
 import ProductList from "@/components/ProductList";
-
 
 export default function Home() {
   return (

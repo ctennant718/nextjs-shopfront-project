@@ -1,7 +1,8 @@
 import React from 'react'
-// import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { useProducts } from "@/lib/tq/products/queries";
 import { List, ListItem } from "@/components/mui";
+import { useAddToBasket } from "@/lib/tq/baskets/mutations";
 import Product from "@/components/Product";
 import Paragraph from "@/components/Paragraph";
 
@@ -10,10 +11,10 @@ const ProductList = ({
   headingLevel = 2,
   canUpdate = false,
   canRemove = false,
-  // canBuy = true,
+  canBuy = true,
 }) => {
-  // const { user } = useUser();
-  // const mutation = useAddToBasket();
+  const { user } = useUser();
+  const mutation = useAddToBasket();
 
   const { data: products } = useProducts();
   if (!products.length) return <Paragraph>No products to show</Paragraph>;
@@ -33,8 +34,8 @@ const ProductList = ({
             headingLevel={headingLevel}
             canUpdate={canUpdate}
             canRemove={canRemove}
-            // canBuy={!!user && canBuy}
-            // addToBasket={() => mutation.mutate(product._id)}
+            canBuy={!!user && canBuy}
+            addToBasket={() => mutation.mutate(product._id)}
           />
         </ListItem>
       ))}
