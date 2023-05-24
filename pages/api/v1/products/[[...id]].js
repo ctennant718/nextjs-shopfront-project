@@ -1,10 +1,13 @@
 import nc from "next-connect";
 import { getSession } from "@auth0/nextjs-auth0";
+
 import {
   handleUnauthorisedAPICall,
   checkPermissions,
 } from "@/lib/api-functions/server/utils";
+
 import permissions from "@/lib/api-functions/server/permissions.js";
+
 import {
   updateProduct,
   removeProduct,

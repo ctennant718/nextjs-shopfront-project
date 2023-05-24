@@ -66,7 +66,7 @@ export default function AdminProductList({ user }) {
             deleteHandler={removeHandler}
             canUpdate={canUpdate}
             canRemove={canRemove}
-            // canBuy={false}
+            canBuy={false}
           />
         </QueryBoundaries>
       </Layout>

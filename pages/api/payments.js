@@ -110,8 +110,6 @@ const handler = async (req, res) => {
   const msg = {
     to: email,
     from: ADMIN_EMAIL,
-    cc: ADMIN_EMAIL,
-    replyTo: ADMIN_EMAIL,
     subject: `Order confirmation`,
     text: `Thank you ${name} for your order!\n\nYou can see a receipt here: ${charge.receipt_url}`,
     html: `<p>Thank you ${name} for your order!</p><p>You can see a receipt <a href="${charge.receipt_url}" target="_blank">here</a></p>`,

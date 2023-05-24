@@ -78,10 +78,6 @@ const handler = nc({
     addBasket(req, res);
   })
   .put(baseRoute, async (req, res) => {
-    // const {owner} = req.params;
-    // if(owner === 'own') {
-    //   return getOwnBasket(req, res);
-    // }
     if (!checkPermissions(req.user, identifier, updateBaskets)) {
       return handleUnauthorisedAPICall(res);
     }

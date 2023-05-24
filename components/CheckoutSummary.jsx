@@ -45,9 +45,6 @@ const BasketList = () => {
                   toDecimal(dinero({ amount: price, currency: GBP }))
                 )}
               </TableCell>
-              {/* <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell> */}
             </TableRow>
           ))}
         </TableBody>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { dinero, toDecimal } from "dinero.js";
-import { GBP } from '@dinero.js/currencies';
+import { GBP } from "@dinero.js/currencies";
 import {
   Typography,
   List,
@@ -29,7 +29,7 @@ const ProductDisplay = ({
   headingLevel = 2,
   canUpdate = false,
   canRemove = false,
-  canBuy=false
+  canBuy = false,
 }) => {
   return (
     <Card sx={{ width: "100%" }}>
@@ -52,7 +52,7 @@ const ProductDisplay = ({
             Price
           </Typography>
           <Typography component="dd" sx={{ fontWeight: "bold" }}>
-          {formatPrice(toDecimal(dinero({ amount: price, currency: GBP})))}
+            {formatPrice(toDecimal(dinero({ amount: price, currency: GBP })))}
           </Typography>
           <Typography component="dt" sx={{ textAlign: "right" }}>
             Quantity
@@ -64,9 +64,9 @@ const ProductDisplay = ({
       </CardContent>
       <CardActions sx={{ display: "grid", placeItems: "center" }}>
         <Box>
-          <Button href={`/products/${slugify(title, _id)}`} component={Link}>
+          {/* <Button href={`/products/${slugify(title, _id)}`} component={Link}>
             View
-          </Button>
+          </Button> */}
           {canUpdate && (
             <IconButton
               aria-label="update"
@@ -81,11 +81,7 @@ const ProductDisplay = ({
               <DeleteIcon />
             </IconButton>
           )}
-          {canBuy && (
-            <Button onClick={addToBasket}>
-              Add to Basket
-            </Button>
-          )}
+          {canBuy && <Button onClick={addToBasket}>Add to Basket</Button>}
         </Box>
       </CardActions>
     </Card>
