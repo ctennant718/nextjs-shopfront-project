@@ -11,20 +11,19 @@ import {
   EditIcon,
   DeleteIcon,
   Button,
-  Box,
+  Box
 } from "@/components/mui";
 import Heading from "@/components/Heading";
-import { slugify, formatPrice } from "@/lib/utils/formatters";
+import { slugify } from "@/lib/utils/formatters";
 
 const ProductDisplay = ({
   product: { _id, title, image, price, quantity } = {},
-  deleteHandler = () => {
-    console.log("no delete handler supplied");
-  },
+  deleteHandler = () => { console.log('no delete handler supplied')},
   headingLevel = 2,
 }) => {
+
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: '100%'}}>
       <CardMedia sx={{ display: "grid", placeItems: "center" }}>
         <Image alt={title} src={image} width="500" height="500" />
       </CardMedia>
@@ -44,7 +43,7 @@ const ProductDisplay = ({
             Price
           </Typography>
           <Typography component="dd" sx={{ fontWeight: "bold" }}>
-          £{(price / 100).toFixed(2)}
+            £{(price / 100).toFixed(2)}
           </Typography>
           <Typography component="dt" sx={{ textAlign: "right" }}>
             Quantity
