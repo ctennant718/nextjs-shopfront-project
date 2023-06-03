@@ -11,8 +11,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Box
-} from '@/components/mui'
+  Box,
+} from "@/components/mui";
 import ShoppingCartDisplay from "@/components/BasketDisplay";
 
 function MobileNavigation({
@@ -26,6 +26,7 @@ function MobileNavigation({
     display: "block",
     textDecoration: "none",
     flexGrow: "1",
+    color: "rgb(59, 73, 111)",
   };
   return (
     <Box component="nav">
@@ -34,7 +35,7 @@ function MobileNavigation({
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, 
+          keepMounted: true,
         }}
         sx={{
           display: { xs: "block", sm: "none" },
@@ -49,21 +50,21 @@ function MobileNavigation({
           <List>
             <ListItem>
               <Link href={"/"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
+                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
                   <ListItemText primary={"Shop"} />
                 </ListItemButton>
               </Link>
             </ListItem>
             <ListItem>
               <Link href={"/blog"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
+                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
                   <ListItemText primary={"Blog"} />
                 </ListItemButton>
               </Link>
             </ListItem>
             <ListItem>
               <Link href={"/contact"} passHref style={itemLinkStyles}>
-                <ListItemButton sx={{ textAlign: "left", width: '100%' }}>
+                <ListItemButton sx={{ textAlign: "left", width: "100%" }}>
                   <ListItemText primary={"Contact"} />
                 </ListItemButton>
               </Link>
@@ -91,11 +92,7 @@ function MobileNavigation({
               </>
             ) : (
               <ListItem>
-                <Link
-                  href={"/api/auth/login"}
-                  passHref
-                  style={{ textDecoration: "none" }}
-                >
+                <Link href={"/api/auth/login"} passHref style={itemLinkStyles}>
                   <ListItemButton sx={{ textAlign: "left" }}>
                     <ListItemText primary={"Log In"} />
                   </ListItemButton>

@@ -21,7 +21,7 @@ function DesktopNavigation({
 }) {
   const theme = useTheme();
   const { user } = useUser();
-  const lightTextColor = theme.palette.common.white;
+  const fontColor = "rgb(59, 73, 111)";
   return (
     <>
       <AppBar component="nav" position="sticky" sx={{ mb: 2 }}>
@@ -43,7 +43,7 @@ function DesktopNavigation({
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               textDecoration: "none",
-              color: lightTextColor,
+              color: fontColor,
             }}
           >
             Go Outdoors!
@@ -52,7 +52,7 @@ function DesktopNavigation({
             {user && <ShoppingCartDisplay user={user} />}
 
             <Button
-              sx={{ color: lightTextColor }}
+              sx={{ color: fontColor }}
               component={Link}
               href="/blog"
             >
@@ -63,21 +63,21 @@ function DesktopNavigation({
                 <Button
                   href="/profile"
                   component={Link}
-                  sx={{ color: lightTextColor }}
+                  sx={{ color: fontColor }}
                 >
                   Profile
                 </Button>
                 <Button
-              sx={{ color: lightTextColor }}
-              component={Link}
-              href="/contact"
-            >
-              Contact
-            </Button>
+                  sx={{ color: fontColor }}
+                  component={Link}
+                  href="/contact"
+                >
+                  Contact
+                </Button>
                 <Button
                   href="/api/auth/logout"
                   component={Link}
-                  sx={{ color: lightTextColor }}
+                  sx={{ color: fontColor }}
                 >
                   Log Out
                 </Button>
@@ -86,7 +86,7 @@ function DesktopNavigation({
               <Button
                 href="/api/auth/login"
                 component={Link}
-                sx={{ color: lightTextColor }}
+                sx={{ color: fontColor }}
               >
                 Log In
               </Button>

@@ -9,6 +9,8 @@ import { add } from "@/lib/api-functions/server/orders/queries";
 const nodemailer = require("nodemailer");
 const { STRIPE_SECRET_KEY, ADMIN_EMAIL } = process.env;
 
+const stripe = new Stripe(STRIPE_SECRET_KEY);
+
 const handler = async (req, res) => {
   let testAccount = await nodemailer.createTestAccount();
 
@@ -22,9 +24,7 @@ const handler = async (req, res) => {
     },
   });
 
-const stripe = new Stripe(STRIPE_SECRET_KEY);
-
-const handler = async (req, res) => {
+  console.log("hit");
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Wrong Method. Only POST allowed" });
   }
@@ -55,6 +55,7 @@ const handler = async (req, res) => {
   let charge = {};
 
   try {
+    console.log("pre customer create");
     const customer = await stripe.customers.create({
       source: token,
       email,
@@ -117,13 +118,17 @@ const handler = async (req, res) => {
 
   try {
     let info = await transporter.sendMail(msg);
-    console.log("Confirmation email sent. Preview URL: %s", nodemailer.getTestMessageUrl(info)); //generates a preview URL
-    res.status(201).json({ message: "Email sent.", receiptURL: charge.receipt_url });
+    console.log(
+      "Confirmation email sent. Preview URL: %s",
+      nodemailer.getTestMessageUrl(info),
+    ); //generates a preview URL
+    res
+      .status(201)
+      .json({ message: "Email sent.", receiptURL: charge.receipt_url });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to send email." });
   }
-}
 };
 
 export default handler;

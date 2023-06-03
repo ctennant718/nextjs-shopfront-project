@@ -18,6 +18,7 @@ import {
 import Heading from "@/components/Heading";
 import { slugify, formatPrice } from "@/lib/utils/formatters";
 
+
 const ProductDisplay = ({
   product: { _id, title, image, price, quantity } = {},
   deleteHandler = () => {
@@ -31,13 +32,21 @@ const ProductDisplay = ({
   canRemove = false,
   canBuy = false,
 }) => {
+  let subComponent = null;
+  if(canBuy === false) {
+    subComponent = <Typography sx={{color: "rgb(59,73,111)"}}>Please log in to purchase</Typography>
+  }
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "90%", marginBlockEnd: "1em" }}>
       <CardMedia sx={{ display: "grid", placeItems: "center" }}>
-        <Image alt={title} src={image} width="500" height="500" />
+        <Image alt={title} src={image} width="400" height="370" />
       </CardMedia>
       <CardContent>
-        <Heading component={`h${headingLevel}`} sx={{ textAlign: "center" }}>
+        <Heading
+          component={`h${headingLevel}`}
+          variant="h4"
+          sx={{ textAlign: "center" }}
+        >
           {title}
         </Heading>
         <List
@@ -48,25 +57,23 @@ const ProductDisplay = ({
             gap: "1em",
           }}
         >
-          <Typography component="dt" sx={{ textAlign: "right" }}>
-            Price
+          <Typography component="dt" sx={{ textAlign: "right", color: "rgb(59,73,111)" }}>
+            Price:
           </Typography>
-          <Typography component="dd" sx={{ fontWeight: "bold" }}>
+          <Typography component="dd" sx={{ fontWeight: "bold", color: "rgb(59,73,111)" }}>
             {formatPrice(toDecimal(dinero({ amount: price, currency: GBP })))}
           </Typography>
-          <Typography component="dt" sx={{ textAlign: "right" }}>
-            Quantity
+          <Typography component="dt" sx={{ textAlign: "right", color: "rgb(59,73,111)" }}>
+            Quantity:
           </Typography>
-          <Typography component="dd" sx={{ fontWeight: "bold" }}>
+          <Typography component="dd" sx={{ fontWeight: "bold", color: "rgb(59,73,111)" }}>
             {quantity} remaining
           </Typography>
         </List>
       </CardContent>
       <CardActions sx={{ display: "grid", placeItems: "center" }}>
         <Box>
-          {/* <Button href={`/products/${slugify(title, _id)}`} component={Link}>
-            View
-          </Button> */}
+        {subComponent}
           {canUpdate && (
             <IconButton
               aria-label="update"
@@ -81,7 +88,19 @@ const ProductDisplay = ({
               <DeleteIcon />
             </IconButton>
           )}
-          {canBuy && <Button onClick={addToBasket}>Add to Basket</Button>}
+          {canBuy && (
+            <Button
+              onClick={addToBasket}
+              sx={{
+                backgroundColor: "rgb(229, 221,191)",
+                color: "rgb(59,73,111)",
+                marginBlockEnd: "1.5em",
+                padding: "1em",
+              }}
+            >
+              Add to Basket
+            </Button>
+          )}
         </Box>
       </CardActions>
     </Card>

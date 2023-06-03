@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useProducts } from "@/lib/tq/products/queries";
-import { List, ListItem } from "@/components/mui";
+import { List, ListItem, Typography } from "@/components/mui";
 import { useAddToBasket } from "@/lib/tq/baskets/mutations";
 import Product from "@/components/Product";
 import Paragraph from "@/components/Paragraph";
@@ -19,28 +19,28 @@ const ProductList = ({
   const { data: products } = useProducts();
   if (!products.length) return <Paragraph>No products to show</Paragraph>;
   return (
-    <List
-      component="ol"
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(400px,1fr))",
-      }}
-    >
-      {products.map((product) => (
-        <ListItem key={product._id} component="li">
-          <Product
-            product={product}
-            deleteHandler={deleteHandler}
-            headingLevel={headingLevel}
-            canUpdate={canUpdate}
-            canRemove={canRemove}
-            canBuy={!!user && canBuy}
-            addToBasket={() => mutation.mutate(product._id)}
-          />
-        </ListItem>
-      ))}
-    </List>
+      <List
+        component="ol"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(400px,1fr))",
+        }}
+      >
+        {products.map((product) => (
+          <ListItem key={product._id} component="li">
+            <Product
+              product={product}
+              deleteHandler={deleteHandler}
+              headingLevel={headingLevel}
+              canUpdate={canUpdate}
+              canRemove={canRemove}
+              canBuy={!!user && canBuy}
+              addToBasket={() => mutation.mutate(product._id)}
+            />
+          </ListItem>
+        ))}
+      </List>
   );
 };
 
-export default ProductList
+export default ProductList;
