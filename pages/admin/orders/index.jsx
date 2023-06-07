@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { getOrdersQuery } from "@/lib/api-functions/server/orders/queries";
+import { getUserOrdersQuery } from "@/lib/api-functions/server/orders/queries";
 import { STORAGE_KEY } from "@/lib/tq/orders/settings";
 
 import { Button } from "@/components/mui";
@@ -37,7 +37,7 @@ export default function AdminOrderList() {
 }
 
 export async function getStaticProps() {
-  const orders = await getOrdersQuery().catch((err) => console.log(err));
+  const orders = await getUserOrdersQuery().catch((err) => console.log(err));
   // console.log("GSP Orders", orders);
   // console.log("j", JSON.parse(JSON.stringify(orders)));
   const queryClient = new QueryClient();
